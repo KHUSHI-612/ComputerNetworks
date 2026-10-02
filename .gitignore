@@ -1,0 +1,24 @@
+# Secrets & private keys — never commit
+*.key
+*.pem
+!edge/certs/.gitkeep
+edge/certs/*
+!edge/certs/README.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+
+# Large captures (keep small samples; store big pcaps outside git if needed)
+evidence/pcapng/*.pcapng
+!evidence/pcapng/.gitkeep
