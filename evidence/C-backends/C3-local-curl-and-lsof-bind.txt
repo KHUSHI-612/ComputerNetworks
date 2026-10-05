@@ -1,0 +1,35 @@
+# Task C: each backend answers locally and listens on all interfaces (*:3001 / *:3002, not 127.0.0.1)
+# Machine: Mac 3 (Manjeet) and Mac 4 (Khushi)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+== Mac 3, Backend A ==
+$ curl -i http://127.0.0.1:3001/api/status
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.14.2
+Date: Fri, 02 Oct 2026 15:48:03 GMT
+Content-Type: application/json
+Content-Length: 30
+Cache-Control: no-store
+X-Backend: A
+Connection: close
+
+{"backend":"A","status":"ok"}
+$ lsof -nP -iTCP:3001 -sTCP:LISTEN
+COMMAND   PID         USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  94389 gargichauhan    3u  IPv4 0xab9fea6a885195c8      0t0  TCP *:3001 (LISTEN)
+
+== Mac 4, Backend B ==
+$ curl -i http://127.0.0.1:3002/api/status
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.14.2
+Date: Fri, 02 Oct 2026 15:48:08 GMT
+Content-Type: application/json
+Content-Length: 30
+Cache-Control: no-store
+X-Backend: B
+Connection: close
+
+{"backend":"B","status":"ok"}
+$ lsof -nP -iTCP:3002 -sTCP:LISTEN
+COMMAND   PID    USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  96127 khushii    3u  IPv4 0xf66b7333ea0225f8      0t0  TCP *:3002 (LISTEN)

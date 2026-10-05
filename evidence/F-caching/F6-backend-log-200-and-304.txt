@@ -1,0 +1,12 @@
+# Task F: backend log. Every request comes from nginx (10.7.18.63). Conditional requests are answered 304; browser fresh cache hits never reach the backend at all.
+# Machine: Backend Flask log
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+10.7.18.63 - - [02/Oct/2026 21:26:50] "GET /api/status HTTP/1.1" 200 -
+10.7.18.63 - - [02/Oct/2026 21:28:57] "GET /api/status HTTP/1.1" 200 -
+10.7.18.63 - - [02/Oct/2026 21:37:37] "GET / HTTP/1.1" 200 -
+10.7.18.63 - - [02/Oct/2026 21:42:35] "HEAD /api/catalog HTTP/1.1" 304 -
+10.7.18.63 - - [02/Oct/2026 21:43:23] "GET /api/catalog HTTP/1.1" 200 -
+10.7.18.63 - - [02/Oct/2026 21:46:22] "GET /api/catalog HTTP/1.1" 304 -
+10.7.18.63 - - [02/Oct/2026 21:46:36] "GET /api/catalog HTTP/1.1" 304 -
+10.7.18.63 - - [02/Oct/2026 21:46:36] "GET /api/catalog HTTP/1.1" 304 -

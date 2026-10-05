@@ -1,0 +1,23 @@
+# Task A: reachability test from Shivam's Mac (first session IPs). TTL 64 = same Layer 2 segment, no router hop.
+# Machine: Mac 1 (Shivam)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+$ ping -c 3 10.7.15.82    # Divya
+PING 10.7.15.82 (10.7.15.82): 56 data bytes
+64 bytes from 10.7.15.82: icmp_seq=0 ttl=64 time=57.085 ms
+64 bytes from 10.7.15.82: icmp_seq=1 ttl=64 time=14.984 ms
+64 bytes from 10.7.15.82: icmp_seq=2 ttl=64 time=108.484 ms
+
+--- 10.7.15.82 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 14.984/60.184/108.484/38.234 ms
+
+$ ping -c 3 10.7.25.218   # Khushi
+PING 10.7.25.218 (10.7.25.218): 56 data bytes
+64 bytes from 10.7.25.218: icmp_seq=0 ttl=64 time=89.019 ms
+64 bytes from 10.7.25.218: icmp_seq=1 ttl=64 time=117.303 ms
+64 bytes from 10.7.25.218: icmp_seq=2 ttl=64 time=34.854 ms
+
+--- 10.7.25.218 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 34.854/80.392/117.303/34.208 ms

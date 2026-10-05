@@ -1,0 +1,24 @@
+# Task B: dnsmasq config syntax check, service start and listening sockets
+# Machine: Mac 1 (Shivam)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+$ /opt/homebrew/sbin/dnsmasq --test --conf-file=/opt/homebrew/etc/dnsmasq.conf
+dnsmasq: syntax check OK.
+
+$ sudo brew services start dnsmasq
+==> Successfully started `dnsmasq` (label: sh.brew.dnsmasq)
+
+$ sudo brew services list | grep dnsmasq
+dnsmasq       started         root /Library/LaunchDaemons/sh.brew.dnsmasq.plist
+
+$ sudo lsof -nP -i :53 | grep dnsmasq
+dnsmasq 49516 nobody    4u  IPv4 0x4ce046df73aec978      0t0  UDP 10.7.17.246:53
+dnsmasq 49516 nobody    5u  IPv4  0xa29aa3446121d82      0t0  TCP 10.7.17.246:53 (LISTEN)
+dnsmasq 49516 nobody    6u  IPv4 0x86d92236e3dbd17d      0t0  UDP 127.0.0.1:53
+dnsmasq 49516 nobody    7u  IPv4 0x79c167671675e28b      0t0  TCP 127.0.0.1:53 (LISTEN)
+dnsmasq 49516 nobody    8u  IPv6 0xc94cb03ba450035a      0t0  UDP [fe80:b::8bd:51e9:bcac:55e0]:53
+dnsmasq 49516 nobody    9u  IPv6 0x9fb30991bc8f3f82      0t0  TCP [fe80:b::8bd:51e9:bcac:55e0]:53 (LISTEN)
+dnsmasq 49516 nobody   10u  IPv6 0xcba80cd49742fdde      0t0  UDP [fe80:1::1]:53
+dnsmasq 49516 nobody   11u  IPv6 0x131296364ae96b2a      0t0  TCP [fe80:1::1]:53 (LISTEN)
+dnsmasq 49516 nobody   12u  IPv6 0xfd253764acc06696      0t0  UDP [::1]:53
+dnsmasq 49516 nobody   13u  IPv6 0x5c6e42658caec4ee      0t0  TCP [::1]:53 (LISTEN)

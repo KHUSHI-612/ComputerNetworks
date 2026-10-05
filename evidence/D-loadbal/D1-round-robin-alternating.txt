@@ -1,0 +1,20 @@
+# Task D: six requests through nginx alternate between Backend A and B (round robin)
+# Machine: Mac 2 (Divya) and Mac 1 (Shivam)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+== Mac 2, through nginx (TLS validated with --cacert, no -k) ==
+$ for i in 1 2 3 4 5 6; do curl -s -o /dev/null -D - --cacert ~/cn-project/certs/newbugs-ca.crt \
+    --resolve app.newbugs.test:443:127.0.0.1 https://app.newbugs.test/api/status | grep -i x-backend; done
+x-backend: A
+x-backend: B
+x-backend: A
+x-backend: B
+x-backend: A
+x-backend: B
+
+== Mac 1, real client path (DNS + trusted CA) ==
+$ for i in 1 2 3 4; do curl -s "https://app.newbugs.test/api/status"; echo; done
+{"backend":"B","status":"ok"}
+{"backend":"A","status":"ok"}
+{"backend":"B","status":"ok"}
+{"backend":"A","status":"ok"}

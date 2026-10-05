@@ -1,0 +1,7 @@
+# Task E: a TLS ClientHello sent straight to a plain-HTTP backend is rejected (400). Bytes \x16\x03\x01 = TLS handshake record. Proves TLS terminates only at nginx.
+# Machine: Backend Flask log
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+10.7.18.63 - - [02/Oct/2026 21:27:25] code 400, message Bad request version ('ñ2U\x95×\x99\x95h')
+10.7.18.63 - - [02/Oct/2026 21:27:25] "\x16\x03\x01\x05å\x01\x00\x05á\x03\x03ì7>\x87í\x8e|ë\x11\x97\x17£I(j\x98\x18k\x98²FªUºf¹:[GëL0 \x07bý,h\x12yL\x0fhì\x1fñ2U\x95×\x99\x95h" 400 -
+10.7.18.63 - - [02/Oct/2026 21:27:25] code 400, message Bad request version ('ç§Ýý¹)ï\x9c\x00,êê\x13\x02\x13\x03\x13\x01À,À+Ì©️À0À/Ì¨À')

@@ -1,0 +1,23 @@
+# Task E: local CA and server certificate created and verified
+# Machine: Mac 2 (Divya)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+$ ls -l
+-rw-r--r--@ 1 divyasingh1  staff  1586  2 Oct 21:10 app.newbugs.test.crt
+-rw-r--r--@ 1 divyasingh1  staff   899  2 Oct 21:09 app.newbugs.test.csr
+-rw-------@ 1 divyasingh1  staff  1704  2 Oct 21:09 app.newbugs.test.key
+-rw-r--r--@ 1 divyasingh1  staff  1846  2 Oct 21:09 newbugs-ca.crt
+-rw-------@ 1 divyasingh1  staff  3268  2 Oct 21:09 newbugs-ca.key
+-rw-r--r--@ 1 divyasingh1  staff    41  2 Oct 21:10 newbugs-ca.srl
+-rw-r--r--  1 divyasingh1  staff   162  2 Oct 21:10 server.ext
+
+$ $OSSL x509 -in app.newbugs.test.crt -noout -subject -issuer -dates -ext subjectAltName
+subject=CN=app.newbugs.test
+issuer=CN=Newbugs Local CA
+notBefore=Oct  2 15:40:11 2026 GMT
+notAfter=Oct  2 15:40:11 2027 GMT
+X509v3 Subject Alternative Name:
+    DNS:app.newbugs.test, DNS:api.newbugs.test
+
+$ $OSSL verify -CAfile newbugs-ca.crt app.newbugs.test.crt
+app.newbugs.test.crt: OK

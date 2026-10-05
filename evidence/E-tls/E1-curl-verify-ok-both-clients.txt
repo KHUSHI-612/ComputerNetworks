@@ -1,0 +1,24 @@
+# Task E: end-to-end HTTPS from both client Macs with the CA trusted in the System keychain. No -k flag.
+# Machine: Mac 1 (Shivam) and Mac 4 (Khushi)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+== Mac 1 ==
+$ curl -v https://app.newbugs.test/api/status 2>&1 | grep -E "Connected to|verify ok|HTTP/|x-backend"
+* Connected to app.newbugs.test (10.7.18.63) port 443
+*  SSL certificate verify ok.
+* using HTTP/2
+> GET /api/status HTTP/2
+< HTTP/2 200
+< x-backend: A
+
+== Mac 4 ==
+$ curl -v https://app.newbugs.test/api/status 2>&1 | grep -E "Connected to|verify ok|HTTP/|x-backend"
+* Connected to app.newbugs.test (10.7.18.63) port 443
+*  SSL certificate verify ok.
+* using HTTP/2
+> GET /api/status HTTP/2
+< HTTP/2 200
+< x-backend: A
+
+== Browser (https://app.newbugs.test/) ==
+{"backend":"B","host":"Khushis-MacBook-Pro.local","message":"service is running","service":"newbugs-app"}

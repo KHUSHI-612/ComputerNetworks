@@ -1,0 +1,19 @@
+# Task B: dnsmasq query log. Shows queries from Khushi (10.7.18.116) and Mac 1 itself (127.0.0.1), forwarding to 1.1.1.1 / 8.8.8.8, and cache hits
+# Machine: Mac 1 (Shivam), sudo tail /tmp/dnsmasq.log
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+Oct  2 21:06:07 dnsmasq[49516]: query[HTTPS] accounts.google.com from 10.7.18.116
+Oct  2 21:06:07 dnsmasq[49516]: forwarded accounts.google.com to 1.1.1.1
+Oct  2 21:06:07 dnsmasq[49516]: query[A] accounts.google.com from 10.7.18.116
+Oct  2 21:06:07 dnsmasq[49516]: cached accounts.google.com is 192.178.158.84
+Oct  2 21:06:07 dnsmasq[49516]: reply accounts.google.com is NODATA
+Oct  2 21:06:13 dnsmasq[49516]: query[AAAA] e6858.dsce9.akamaiedge.net from 127.0.0.1
+Oct  2 21:06:13 dnsmasq[49516]: forwarded e6858.dsce9.akamaiedge.net to 1.1.1.1
+Oct  2 21:06:13 dnsmasq[49516]: reply e6858.dsce9.akamaiedge.net is 2600:140f:8a00:184::1aca
+Oct  2 21:06:27 dnsmasq[49516]: query[PTR] lb._dns-sd._udp.0.0.7.10.in-addr.arpa from 127.0.0.1
+Oct  2 21:06:27 dnsmasq[49516]: forwarded lb._dns-sd._udp.0.0.7.10.in-addr.arpa to 1.1.1.1
+Oct  2 21:06:27 dnsmasq[49516]: forwarded lb._dns-sd._udp.0.0.7.10.in-addr.arpa to 8.8.8.8
+Oct  2 21:06:27 dnsmasq[49516]: reply lb._dns-sd._udp.0.0.7.10.in-addr.arpa is NXDOMAIN
+Oct  2 21:06:34 dnsmasq[49516]: query[A] api2direct.cursor.sh from 127.0.0.1
+Oct  2 21:06:34 dnsmasq[49516]: forwarded api2direct.cursor.sh to 8.8.8.8
+Oct  2 21:06:34 dnsmasq[49516]: reply api2direct.cursor.sh is 3.92.129.183

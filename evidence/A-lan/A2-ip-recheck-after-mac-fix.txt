@@ -1,0 +1,27 @@
+# Task A: IPs after turning Private Wi-Fi Address OFF (new DHCP leases, ether now equals hardware Wi-Fi ID). These are the final project IPs.
+# Machine: all four Macs
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+== Shivam (Mac 1) ==
+$ ipconfig getifaddr en0
+10.7.17.246
+$ ifconfig en0 | grep ether
+ether 10:9f:41:b0:10:7c
+
+== Divya (Mac 2) ==
+$ ipconfig getifaddr en0
+10.7.18.63
+$ ifconfig en0 | grep ether
+ether 10:9f:41:bf:b4:79
+
+== Manjeet (Mac 3) ==
+$ ipconfig getifaddr en0
+10.7.2.214
+$ ifconfig en0 | grep ether
+ether 62:66:04:f2:51:77
+
+== Khushi (Mac 4) ==
+$ ipconfig getifaddr en0
+10.7.18.116
+$ ifconfig en0 | grep ether
+ether 10:9f:41:bd:58:a9
