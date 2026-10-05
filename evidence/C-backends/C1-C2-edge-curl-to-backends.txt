@@ -1,0 +1,40 @@
+# Task C: Mac 2 (edge) reaches both backends directly over the LAN, the path nginx uses
+# Machine: Mac 2 (Divya)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+$ curl -i http://10.7.2.214:3001/api/status
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.14.2
+Date: Fri, 02 Oct 2026 15:50:08 GMT
+Content-Type: application/json
+Content-Length: 30
+Cache-Control: no-store
+X-Backend: A
+Connection: close
+
+{"backend":"A","status":"ok"}
+
+$ curl -i http://10.7.18.116:3002/api/status
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.14.2
+Date: Fri, 02 Oct 2026 15:50:08 GMT
+Content-Type: application/json
+Content-Length: 30
+Cache-Control: no-store
+X-Backend: B
+Connection: close
+
+{"backend":"B","status":"ok"}
+
+$ curl -i http://10.7.18.116:3002/api/catalog
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.14.2
+Date: Fri, 02 Oct 2026 15:50:08 GMT
+Content-Type: application/json
+Content-Length: 73
+ETag: "e946e9046cad3704"
+Cache-Control: public, max-age=60
+X-Backend: B
+Connection: close
+
+{"topics": ["dns", "tcp", "tls", "http", "load-balancing"], "version": 1}

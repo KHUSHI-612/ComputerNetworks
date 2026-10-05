@@ -1,0 +1,23 @@
+# Task D: passive health check and retry. Backend B briefly unreachable: nginx timed out, retried on A, marked B down for 10 s; client still got 200
+# Machine: Mac 2 (Divya)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+$ sudo tail -5 /opt/homebrew/var/log/nginx/newbugs_error.log
+2026/10/02 21:24:31 [error] 16731#0: *3 upstream timed out (60: Operation timed out) while connecting to upstream, client: 127.0.0.1, server: app.newbugs.test, request: "GET /api/status HTTP/2.0", upstream: "http://10.7.18.116:3002/api/status", host: "app.newbugs.test"
+2026/10/02 21:24:34 [warn] 16731#0: *8 upstream server temporarily disabled while connecting to upstream, client: 127.0.0.1, server: app.newbugs.test, request: "GET /api/status HTTP/2.0", upstream: "http://10.7.18.116:3002/api/status", host: "app.newbugs.test"
+2026/10/02 21:24:34 [error] 16731#0: *8 upstream timed out (60: Operation timed out) while connecting to upstream, client: 127.0.0.1, server: app.newbugs.test, request: "GET /api/status HTTP/2.0", upstream: "http://10.7.18.116:3002/api/status", host: "app.newbugs.test"
+
+$ sudo tail -6 /opt/homebrew/var/log/nginx/newbugs_access.log
+127.0.0.1:53903 "GET /api/status HTTP/2.0" 200 upstream=10.7.2.214:3001 up_status=200 rt=0.047
+127.0.0.1:53905 "GET /api/status HTTP/2.0" 200 upstream=10.7.18.116:3002, 10.7.2.214:3001 up_status=504, 200 rt=2.001, 0.145
+127.0.0.1:53908 "GET /api/status HTTP/2.0" 200 upstream=10.7.2.214:3001 up_status=200 rt=0.041
+127.0.0.1:53910 "GET /api/status HTTP/2.0" 200 upstream=10.7.18.116:3002, 10.7.2.214:3001 up_status=504, 200 rt=2.002, 0.047
+127.0.0.1:53913 "GET /api/status HTTP/2.0" 200 upstream=10.7.2.214:3001 up_status=200 rt=0.037
+127.0.0.1:53915 "GET /api/status HTTP/2.0" 200 upstream=10.7.2.214:3001 up_status=200 rt=0.036
+
+$ sudo nginx -T 2>/dev/null | grep -A4 "upstream newbugs"
+upstream newbugs_backends {
+    server 10.7.2.214:3001  max_fails=2 fail_timeout=10s;   # Backend A (Mac 3, Manjeet)
+    server 10.7.18.116:3002 max_fails=2 fail_timeout=10s;   # Backend B (Mac 4, Khushi)
+    keepalive 16;
+}

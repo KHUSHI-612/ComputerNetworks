@@ -1,0 +1,67 @@
+# Task A: network details of all four Macs (first check, Private Wi-Fi Address still ON, so MACs shown are randomized and IPs changed afterwards)
+# Machine: all four Macs
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+== Shivam (Mac 1) ==
+$ ipconfig getifaddr en0
+10.7.7.232
+$ ipconfig getoption en0 subnet_mask
+255.255.224.0
+$ netstat -rn | grep default
+default            10.7.0.1           UGScg                 en0
+$ ifconfig en0 | grep ether
+ether 7a:5c:d9:85:59:90
+$ networksetup -getinfo Wi-Fi
+DHCP Configuration
+IP address: 10.7.7.232
+Subnet mask: 255.255.224.0
+Router: 10.7.0.1
+Wi-Fi ID: 10:9f:41:b0:10:7c
+
+== Divya (Mac 2) ==
+$ ipconfig getifaddr en0
+10.7.15.82
+$ ipconfig getoption en0 subnet_mask
+255.255.224.0
+$ netstat -rn | grep default
+default            10.7.0.1           UGScg                 en0
+$ ifconfig en0 | grep ether
+ether 62:eb:c5:2d:4a:ba
+$ networksetup -getinfo Wi-Fi
+DHCP Configuration
+IP address: 10.7.15.82
+Subnet mask: 255.255.224.0
+Router: 10.7.0.1
+Wi-Fi ID: 10:9f:41:bf:b4:79
+
+== Manjeet (Mac 3) ==
+$ ipconfig getifaddr en0
+10.7.2.214
+$ ipconfig getoption en0 subnet_mask
+255.255.224.0
+$ netstat -rn | grep default
+default            10.7.0.1           UGScg                 en0
+$ ifconfig en0 | grep ether
+ether 62:66:04:f2:51:77
+$ networksetup -getinfo Wi-Fi
+DHCP Configuration
+IP address: 10.7.2.214
+Subnet mask: 255.255.224.0
+Router: 10.7.0.1
+Wi-Fi ID: 50:a6:d8:ac:36:ad
+
+== Khushi (Mac 4) ==
+$ ipconfig getifaddr en0
+10.7.25.218
+$ ipconfig getoption en0 subnet_mask
+255.255.224.0
+$ netstat -rn | grep default
+default            10.7.0.1           UGScg                 en0
+$ ifconfig en0 | grep ether
+ether a6:be:d5:4c:e2:ad
+$ networksetup -getinfo Wi-Fi
+DHCP Configuration
+IP address: 10.7.25.218
+Subnet mask: 255.255.224.0
+Router: 10.7.0.1
+Wi-Fi ID: 10:9f:41:bd:58:a9

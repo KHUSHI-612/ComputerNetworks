@@ -1,0 +1,20 @@
+# Task B: Mac 1 uses its own DNS (127.0.0.1); system resolver and ping by name
+# Machine: Mac 1 (Shivam)
+# Terminal output copied from the team's session on 2026-10-02 (transcript, not a screenshot)
+
+$ sudo networksetup -setdnsservers Wi-Fi 127.0.0.1
+$ networksetup -getdnsservers Wi-Fi
+127.0.0.1
+$ dig app.newbugs.test +short
+10.7.18.63
+$ dscacheutil -q host -a name app.newbugs.test
+name: app.newbugs.test
+ip_address: 10.7.18.63
+
+$ ping -c 2 app.newbugs.test
+PING app.newbugs.test (10.7.18.63): 56 data bytes
+64 bytes from 10.7.18.63: icmp_seq=0 ttl=64 time=45.114 ms
+64 bytes from 10.7.18.63: icmp_seq=1 ttl=64 time=161.400 ms
+
+--- app.newbugs.test ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
